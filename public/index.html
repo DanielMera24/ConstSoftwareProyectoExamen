@@ -1,0 +1,58 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Partidos de Fútbol</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚽ Generador de Partidos de Fútbol</h1>
+            <p>Genera partidos de fútbol aleatorios a partir de tu lista de equipos</p>
+        </header>
+
+        <main>
+            <!-- Paso 1: Ingreso de cantidad de equipos -->
+            <section id="team-count-section" class="section active">
+                <div class="card">
+                    <h2>Paso 1: ¿Cuántos equipos?</h2>
+                    <div class="input-group">
+                        <label for="team-count">Número de equipos (2-30, debe ser par)</label>
+                        <input type="number" id="team-count" min="2" max="30" placeholder="Ingresa el número de equipos">
+                        <div id="team-count-error" class="error-message"></div>
+                    </div>
+                    <button id="proceed-to-teams" class="btn btn-primary" disabled>Siguiente: Ingresar Nombres</button>
+                </div>
+            </section>
+
+            <!-- Paso 2: Ingreso de nombres de equipos -->
+            <section id="team-names-section" class="section">
+                <div class="card">
+                    <h2>Paso 2: Ingresa los Nombres de los Equipos</h2>
+                    <p class="subtitle">Ingresa un nombre para cada equipo (solo letras y espacios, máximo 40 caracteres)</p>
+                    <div id="team-inputs-container" class="team-inputs"></div>
+                    <div class="button-group">
+                        <button id="back-to-count" class="btn btn-secondary">← Atrás</button>
+                        <button id="generate-matches" class="btn btn-primary" disabled>Generar Partidos</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Paso 3: Resultados de los partidos -->
+            <section id="matches-section" class="section">
+                <div class="card">
+                    <h2>Tus Partidos Aleatorios</h2>
+                    <div id="matches-container" class="matches-container"></div>
+                    <div class="button-group">
+                        <button id="regenerate-matches" class="btn btn-secondary">🔄 Regenerar Partidos</button>
+                        <button id="start-over" class="btn btn-primary">Empezar de Nuevo</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
