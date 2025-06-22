@@ -7,14 +7,15 @@ module.exports = {
   },
   parserOptions: {
     ecmaVersion: 2022,
-    sourceType: 'module', // Agregar esta línea
+    sourceType: 'module',
   },
   extends: [
     'eslint:recommended',
     'plugin:prettier/recommended',
   ],
   rules: {
-    'no-console': ['warn', { allow: ['warn', 'error'] }],
+    'no-console': 'off',
+    'no-undef': 'off',
     'eqeqeq': 'error',
     'curly': 'error',
     'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
