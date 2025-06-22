@@ -1,7 +1,8 @@
 import { JSDOM } from 'jsdom';
 
 // Setup DOM environment for testing
-const dom = new JSDOM(`
+const dom = new JSDOM(
+  `
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,13 +38,40 @@ const dom = new JSDOM(`
     </div>
 </body>
 </html>
-`, { url: 'http://localhost' });
+`,
+  {
+    url: 'http://localhost',
+    runScripts: 'dangerously',
+    resources: 'usable',
+  }
+);
 
+// Setup global DOM environment
 global.window = dom.window;
 global.document = dom.window.document;
 global.HTMLElement = dom.window.HTMLElement;
 global.Event = dom.window.Event;
 
-// Mock console methods for cleaner test output
-global.console.log = () => {};
-global.console.error = () => {};
+// Handle navigator property safely (it's read-only in newer Node.js)
+try {
+  global.navigator = dom.window.navigator;
+} catch (error) {
+  // If we can't set navigator, that's okay for our tests
+  console.log(
+    'Note: Could not set global.navigator (this is normal in newer Node.js versions)'
+  );
+}
+
+// Mock console methods for cleaner test output if needed
+// Comment these out if you want to see console output during debugging
+// global.console.log = () => {};
+// global.console.error = () => {};
+
+// Make sure window object has all the properties it needs
+Object.defineProperty(global.window, 'location', {
+  value: {
+    href: 'http://localhost',
+    origin: 'http://localhost',
+  },
+  writable: true,
+});
